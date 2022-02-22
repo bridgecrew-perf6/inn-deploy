@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: inn-user-interface
+  namespace: inn
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      name: http
+      protocol: TCP
+    - port: 81
+      targetPort: 81
+      name: rpc
+      protocol: TCP
+  selector:
+    app: inn-user-interface

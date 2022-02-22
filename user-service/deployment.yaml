@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inn-user-interface
+  namespace: inn
+  labels:
+    app: inn-user-interface
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: inn-user-interface
+  template:
+    metadata:
+      annotations:
+        prometheus.io/port: '80'
+        prometheus.io/scrape: 'true'
+      labels:
+        app: inn-user-interface
+    spec:
+      containers:
+        - name: inn-user-interface
+          image: wistarplus/inn-user-interface
+          ports:
+            - containerPort: 80
+            - containerPort: 81
+          volumeMounts:
+            - name: config
+              mountPath: /data/conf
+      volumes:
+        - name: config
+          configMap:
+            name: inn-user-interface

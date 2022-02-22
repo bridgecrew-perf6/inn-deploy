@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: inn-user-interface
+  namespace: prod-env
+  labels:
+    app: inn-user-interface
+data:
+  config.yaml: |-
+    server:
+      http:
+        addr: 0.0.0.0:80
+        timeout: 1s
+      grpc:
+        addr: 0.0.0.0:81
+        timeout: 1s
